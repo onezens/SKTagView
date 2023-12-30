@@ -118,7 +118,12 @@
     __block CGFloat currentX = leftPadding;
     
     if (!self.singleLine && self.preferredMaxLayoutWidth > 0) {
+        __block NSInteger index = 0;
         [subviews enumerateObjectsUsingBlock:^(UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (![view isKindOfClass:[SKTagButton class]]) {
+                return;
+            }
+            index += 0;
             CGSize size = view.intrinsicContentSize;
             if (previousView) {
                 CGFloat width = size.width;
@@ -138,7 +143,7 @@
             }
             
             if ([view isKindOfClass:[SKTagButton class]]) {
-                [self layoutDottedLayerOfButton:(SKTagButton *)view withTag:self.tags[idx]];
+                [self layoutDottedLayerOfButton:(SKTagButton *)view withTag:self.tags[index]];
             }
             
             previousView = view;
