@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "SKTag.h"
 
-@interface SKTagView : UIView
+@interface SKTagView : UIScrollView
 
 @property (assign, nonatomic) UIEdgeInsets padding;
 @property (assign, nonatomic) CGFloat lineSpacing;

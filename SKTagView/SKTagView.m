@@ -160,6 +160,8 @@
     }
     
     self.didSetup = YES;
+    self.contentSize = CGSizeMake(self.bounds.size.width, CGRectGetMaxY(previousView.frame));
+
 }
 
 - (void)layoutDottedLayerOfButton:(SKTagButton *)tagBtn withTag:(SKTag *)tag{
