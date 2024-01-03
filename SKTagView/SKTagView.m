@@ -108,7 +108,7 @@
         return;
     }
     
-    NSArray *subviews = self.subviews;
+    NSArray *subviews = self.contentView.subviews;
     CGFloat topPadding = self.padding.top;
     CGFloat leftPadding = self.padding.left;
     CGFloat rightPadding = self.padding.right;
@@ -276,8 +276,10 @@
     if (!_contentView) {
         _contentView = [UIView new];
         _contentView.backgroundColor = [UIColor clearColor];
+        [self addSubview:_contentView];
     }
     return _contentView;
 }
 
 @end
+
