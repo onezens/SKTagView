@@ -74,6 +74,7 @@
 }
 
 - (void)layoutSubviews {
+    self.contentView.frame = self.bounds;
     if (!self.singleLine) {
         self.preferredMaxLayoutWidth = self.frame.size.width;
     }
@@ -208,7 +209,7 @@
     NSParameterAssert(tag);
     SKTagButton *btn = [SKTagButton buttonWithTag: tag];
     [btn addTarget: self action: @selector(onTag:) forControlEvents: UIControlEventTouchUpInside];
-    [self addSubview: btn];
+    [self.contentView addSubview: btn];
     [self.tags addObject: tag];
     
     self.didSetup = NO;
@@ -268,6 +269,15 @@
     
     self.didSetup = NO;
     [self invalidateIntrinsicContentSize];
+}
+
+- (UIView *)contentView
+{
+    if (!_contentView) {
+        _contentView = [UIView new];
+        _contentView.backgroundColor = [UIColor clearColor];
+    }
+    return _contentView;
 }
 
 @end
