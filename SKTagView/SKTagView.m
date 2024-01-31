@@ -25,7 +25,7 @@
         return CGSizeZero;
     }
     
-    NSArray *subviews = self.subviews;
+    NSArray *subviews = self.contentView.subviews;
     UIView *previousView = nil;
     CGFloat topPadding = self.padding.top;
     CGFloat bottomPadding = self.padding.bottom;
@@ -74,7 +74,6 @@
 }
 
 - (void)layoutSubviews {
-    self.contentView.frame = self.bounds;
     if (!self.singleLine) {
         self.preferredMaxLayoutWidth = self.frame.size.width;
     }
@@ -167,6 +166,7 @@
     
     self.didSetup = YES;
     self.contentSize = CGSizeMake(self.bounds.size.width, CGRectGetMaxY(previousView.frame));
+    self.contentView.frame = (CGRect){CGPointZero, self.contentSize};
 
 }
 
@@ -199,7 +199,8 @@
 
 - (void)onTag: (UIButton *)btn {
     if (self.didTapTagAtIndex) {
-        self.didTapTagAtIndex([self.subviews indexOfObject: btn]);
+        
+        self.didTapTagAtIndex([self.contentView.subviews indexOfObject: btn]);
     }
 }
 
@@ -239,8 +240,8 @@
     }
     
     [self.tags removeObjectAtIndex: index];
-    if (self.subviews.count > index) {
-        [self.subviews[index] removeFromSuperview];
+    if (self.contentView.subviews.count > index) {
+        [self.contentView.subviews[index] removeFromSuperview];
     }
     
     self.didSetup = NO;
@@ -253,8 +254,8 @@
     }
     
     [self.tags removeObjectAtIndex: index];
-    if (self.subviews.count > index) {
-        [self.subviews[index] removeFromSuperview];
+    if (self.contentView.subviews.count > index) {
+        [self.contentView.subviews[index] removeFromSuperview];
     }
     
     self.didSetup = NO;
@@ -263,7 +264,7 @@
 
 - (void)removeAllTags {
     [self.tags removeAllObjects];
-    for (UIView *view in self.subviews) {
+    for (UIView *view in self.contentView.subviews) {
         [view removeFromSuperview];
     }
     
